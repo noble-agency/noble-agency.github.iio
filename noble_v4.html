@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOBLE.</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0a0a0a;color:#fff;font-family:'Noto Sans KR',sans-serif;font-weight:400;line-height:1.8;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);border-bottom:0.5px solid rgba(255,255,255,0.1)}
+.logo{font-family:'DM Sans',sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:0.15em;color:#fff}
+.logo span{color:#7B61FF}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul a{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s}
+nav ul a:hover{color:#fff}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;background:#0a0a0a}
+.glow1{position:absolute;top:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(123,97,255,0.18) 0%,transparent 65%);pointer-events:none}
+.glow2{position:absolute;bottom:-50px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,229,180,0.1) 0%,transparent 65%);pointer-events:none}
+
+.eyebrow{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#7B61FF;margin-bottom:2rem;opacity:0;animation:fadeUp 0.9s ease forwards 0.2s}
+.hero-title{font-family:'DM Sans',sans-serif;font-size:clamp(2.6rem,8vw,4.5rem);font-weight:700;line-height:1.15;letter-spacing:-0.03em;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.9s ease forwards 0.4s}
+.hero-title em{font-style:normal;background:linear-gradient(90deg,#7B61FF,#00E5B4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,0.6);max-width:400px;line-height:1.9;opacity:0;animation:fadeUp 0.9s ease forwards 0.6s}
+
+section{padding:5rem 2rem;border-top:0.5px solid rgba(255,255,255,0.1);background:#0a0a0a}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:#7B61FF;margin-bottom:2.5rem}
+
+.hockey-title{font-family:'DM Sans',sans-serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;line-height:1.3;letter-spacing:-0.02em;margin-bottom:1.2rem}
+.hockey-body{font-size:0.95rem;color:rgba(255,255,255,0.6);line-height:2;margin-bottom:2rem}
+.highlight{color:#00E5B4;font-weight:700}
+.chart-wrap{margin:2rem 0}
+.chart-wrap svg{width:100%;height:auto}
+.phases{display:flex;flex-direction:column}
+.phase{display:grid;grid-template-columns:2.5rem 1fr;gap:1rem;padding:1.2rem 0;border-top:0.5px solid rgba(255,255,255,0.1);align-items:start}
+.phase-n{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;color:#7B61FF;padding-top:3px}
+.phase-title{font-size:1rem;font-weight:700;margin-bottom:4px;color:#fff}
+.phase-desc{font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.7}
+
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.1);border:0.5px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden}
+.product{background:#141414;padding:2rem;transition:background 0.2s}
+.product:hover{background:#1c1c1c}
+.product-tag{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#7B61FF;margin-bottom:1rem;display:block}
+.product-name{font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:1.2rem;color:#fff}
+.product-price{font-family:'DM Sans',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:-0.03em;color:#fff}
+.product-price sup{font-size:1rem;font-weight:400;vertical-align:super}
+.product-price .unit{font-size:1rem;font-weight:400;color:rgba(255,255,255,0.45)}
+.product-price-inquiry{font-family:'DM Sans',sans-serif;font-size:1.3rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:-0.01em}
+.product-unit{font-size:0.82rem;color:rgba(255,255,255,0.45);margin:6px 0 1.2rem}
+.product-detail{list-style:none;font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.9;border-top:0.5px solid rgba(255,255,255,0.1);padding-top:1rem}
+.product-detail li{padding:3px 0;display:flex;align-items:center;gap:8px}
+.product-detail li::before{content:'';width:5px;height:5px;border-radius:50%;background:#7B61FF;flex-shrink:0}
+
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.pkg{background:#141414;border:0.5px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:border-color 0.25s}
+.pkg::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7B61FF,#00E5B4);opacity:0;transition:opacity 0.25s}
+.pkg:hover{border-color:rgba(123,97,255,0.4)}
+.pkg:hover::before{opacity:1}
+.pkg-tag{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#7B61FF;margin-bottom:0.8rem;display:block}
+.pkg-name{font-family:'DM Sans',sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.3rem;color:#fff}
+.pkg-combo{font-size:0.82rem;color:rgba(255,255,255,0.45);margin-bottom:1.5rem}
+.pkg-price-row{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem}
+.pkg-original{font-size:0.95rem;color:rgba(255,255,255,0.35);text-decoration:line-through}
+.pkg-final{font-family:'DM Sans',sans-serif;font-size:2.4rem;font-weight:700;letter-spacing:-0.03em;background:linear-gradient(90deg,#7B61FF,#00E5B4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pkg-saving{display:inline-flex;align-items:center;font-size:0.8rem;font-weight:500;color:#00E5B4;background:rgba(0,229,180,0.08);border:0.5px solid rgba(0,229,180,0.25);border-radius:100px;padding:4px 12px;margin-bottom:1.5rem}
+.pkg-list{list-style:none;font-size:0.88rem;color:rgba(255,255,255,0.6)}
+.pkg-list li{padding:8px 0;border-top:0.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:10px}
+.pkg-list li::before{content:'—';color:#7B61FF;flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:700}
+
+.longterm-banner{background:#141414;border:0.5px solid rgba(123,97,255,0.25);border-radius:16px;padding:2.5rem;position:relative;overflow:hidden}
+.longterm-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7B61FF,#00E5B4)}
+.longterm-label{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:#7B61FF;margin-bottom:0.8rem;display:block}
+.longterm-pct{font-family:'DM Sans',sans-serif;font-size:3.5rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#7B61FF,#00E5B4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:0.8rem}
+.longterm-title{font-size:1.1rem;font-weight:700;margin-bottom:0.6rem;color:#fff}
+.longterm-desc{font-size:0.9rem;color:rgba(255,255,255,0.6);line-height:1.9}
+.risk-banner{background:#141414;border:0.5px solid rgba(255,255,255,0.1);border-left:3px solid #00E5B4;border-radius:0 12px 12px 0;padding:1.8rem 2rem;margin-top:1.2rem}
+.risk-title{font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:#fff}
+.risk-desc{font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.9}
+.risk-highlight{color:#00E5B4;font-weight:700}
+
+.free-pills{display:flex;flex-wrap:wrap;gap:0.75rem}
+.free-pill{font-size:0.88rem;font-weight:500;padding:10px 20px;border-radius:100px;border:0.5px solid rgba(123,97,255,0.35);background:rgba(123,97,255,0.08);color:rgba(255,255,255,0.85);transition:border-color 0.2s,background 0.2s}
+.free-pill:hover{border-color:#7B61FF;background:rgba(123,97,255,0.15)}
+
+.note{background:#141414;border:0.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.8rem 2rem;font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:2.2}
+.note strong{color:rgba(255,255,255,0.9);font-weight:700}
+
+footer{padding:2.5rem 2rem;border-top:0.5px solid rgba(255,255,255,0.1);background:#0a0a0a;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.15em;color:#fff}
+.footer-logo span{color:#7B61FF}
+.footer-note{font-size:0.78rem;color:rgba(255,255,255,0.4)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:640px){
+  nav ul{display:none}
+  .products-grid{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">NOBLE<span>.</span></div>
+  <ul>
+    <li><a href="#service">서비스</a></li>
+    <li><a href="#package">패키지</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none">
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+  <p class="eyebrow">Instagram Viral Marketing Agency</p>
+  <h1 class="hero-title">누적이 결과를 만들고,<br><em>기다림이 성장을 이끈다.</em></h1>
+  <p class="hero-sub">1인 브랜드와 개인 사업자를 위한 인스타그램 바이럴 전략. 세계관에서 시작해 매출까지 함께 설계합니다.</p>
+</section>
+
+<!-- SERVICES -->
+<section id="service">
+  <p class="sec-label">Services · 개별 상품</p>
+  <div class="products-grid fade-in">
+    <div class="product">
+      <span class="product-tag">A — 브랜드 설계</span>
+      <p class="product-name">브랜드 세계관 & 컨셉 · 목표 설정</p>
+      <p class="product-price"><sup>₩</sup>100<span class="unit">만원</span></p>
+      <p class="product-unit">소요 기간 약 1–2주 · 재계약시 70만원</p>
+      <ul class="product-detail">
+        <li>채널 목표 및 콘텐츠 방향 정밀 설계</li>
+        <li>업체 성장에 따라 2–6개월마다 업데이트</li>
+      </ul>
+    </div>
+    <div class="product">
+      <span class="product-tag">B — 풀서비스</span>
+      <p class="product-name">영상 기획 + 편집 + 업로드</p>
+      <p class="product-price"><sup>₩</sup>100<span class="unit">만원</span></p>
+      <p class="product-unit">월 8회 (주 2회) · VAT 별도</p>
+      <ul class="product-detail">
+        <li>기획부터 편집, 업로드 원스톱 진행</li>
+        <li>출장 촬영 추가 비용 없음</li>
+        <li>해시태그 최적화 무료 · 캡션 요청시 무료</li>
+      </ul>
+    </div>
+    <div class="product">
+      <span class="product-tag">C — 기획 전용</span>
+      <p class="product-name">영상 기획만</p>
+      <p class="product-price"><sup>₩</sup>80<span class="unit">만원</span></p>
+      <p class="product-unit">월 8회 (주 2회) · VAT 별도</p>
+      <ul class="product-detail">
+        <li>촬영 · 편집은 자체 진행하는 분을 위한 상품</li>
+        <li>해시태그 최적화 무료 · 캡션 요청시 무료</li>
+      </ul>
+    </div>
+    <div class="product">
+      <span class="product-tag">D — 전략 문서</span>
+      <p class="product-name">알고리즘 전략 문서</p>
+      <p class="product-price-inquiry">가격 별도 문의</p>
+      <p class="product-unit">VAT 별도 · 패키지 계약시 무료 포함</p>
+      <ul class="product-detail">
+        <li>채널 상황에 맞는 알고리즘 전략 제공</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="package">
+  <p class="sec-label">Packages · 패키지</p>
+  <div class="pkg-grid fade-in">
+    <div class="pkg">
+      <span class="pkg-tag">Package 01</span>
+      <p class="pkg-name">세계관 + 풀서비스</p>
+      <p class="pkg-combo">상품 A + 상품 B · 알고리즘 전략 문서 포함</p>
+      <div class="pkg-price-row"><span class="pkg-original">200만원</span><span class="pkg-final">180만원</span></div>
+      <span class="pkg-saving">10만원 절약</span>
+      <ul class="pkg-list">
+        <li>브랜드 세계관 & 목표 설정</li>
+        <li>영상 기획 + 편집 + 업로드 월 8회</li>
+        <li>알고리즘 전략 문서 무료</li>
+        <li>출장 촬영 추가 비용 없음</li>
+        <li>해시태그 · 캡션 무료</li>
+      </ul>
+    </div>
+    <div class="pkg">
+      <span class="pkg-tag">Package 02</span>
+      <p class="pkg-name">세계관 + 기획 전용</p>
+      <p class="pkg-combo">상품 A + 상품 C · 알고리즘 전략 문서 포함</p>
+      <div class="pkg-price-row"><span class="pkg-original">180만원</span><span class="pkg-final">165만원</span></div>
+      <span class="pkg-saving">15만원 절약</span>
+      <ul class="pkg-list">
+        <li>브랜드 세계관 & 목표 설정</li>
+        <li>영상 기획 월 8회 (편집은 자체 진행)</li>
+        <li>알고리즘 전략 문서 무료</li>
+        <li>해시태그 · 캡션 무료</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- HOCKEY STICK -->
+<section id="about">
+  <p class="sec-label">Why · 하키채 효과</p>
+  <div class="fade-in">
+    <h2 class="hockey-title">처음엔 느려 보여도,<br>반드시 꺾이는 순간이 옵니다.</h2>
+    <p class="hockey-body">바이럴은 선형으로 성장하지 않습니다. 초반의 미미한 반응 속에서 알고리즘이 계정을 인식하고, 데이터가 쌓이면 특정 시점을 기점으로 수직 상승합니다.<br><br><span class="highlight">정해진 세계관과 목표에 따라 일관성 있게 계정을 운영하는 것</span>이 가장 중요합니다.</p>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7B61FF" stop-opacity="0.3"/><stop offset="100%" stop-color="#7B61FF" stop-opacity="0"/></linearGradient>
+          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7B61FF"/><stop offset="100%" stop-color="#00E5B4"/></linearGradient>
+        </defs>
+        <line x1="30" y1="10" x2="30" y2="190" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        <line x1="30" y1="190" x2="390" y2="190" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        <line x1="30" y1="130" x2="390" y2="130" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <line x1="30" y1="70" x2="390" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" stroke-dasharray="4,4"/>
+        <path d="M 30 183 C 90 181 160 178 230 172 C 270 168 290 163 310 152 C 330 139 348 108 365 72 C 378 44 385 22 390 12 L 390 190 L 30 190 Z" fill="url(#fg)"/>
+        <path d="M 30 183 C 90 181 160 178 230 172 C 270 168 290 163 310 152 C 330 139 348 108 365 72 C 378 44 385 22 390 12" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <circle cx="310" cy="152" r="5" fill="#0a0a0a" stroke="#00E5B4" stroke-width="2"/>
+        <text x="318" y="148" font-family="DM Sans" font-size="11" font-weight="700" fill="#00E5B4">변곡점</text>
+        <text x="24" y="208" font-family="DM Sans" font-size="10" fill="rgba(255,255,255,0.4)">기반기</text>
+        <text x="195" y="208" font-family="DM Sans" font-size="10" fill="rgba(255,255,255,0.4)">성장기</text>
+        <text x="363" y="208" font-family="DM Sans" font-size="10" fill="rgba(255,255,255,0.4)">폭발기</text>
+      </svg>
+    </div>
+    <div class="phases">
+      <div class="phase"><span class="phase-n">01</span><div><p class="phase-title">기반 다지기</p><p class="phase-desc">브랜드 세계관 정립 · 알고리즘에 계정 인식시키기</p></div></div>
+      <div class="phase"><span class="phase-n">02</span><div><p class="phase-title">소규모 노출 & 데이터 수집</p><p class="phase-desc">의도하지 않은 소규모 노출로 반응 체크 · 전략 수정</p></div></div>
+      <div class="phase"><span class="phase-n">03</span><div><p class="phase-title">대형 반응 발생</p><p class="phase-desc">영상 한두 개가 터지며 계정이 성장 궤도에 진입</p></div></div>
+      <div class="phase"><span class="phase-n">04</span><div><p class="phase-title">계정 & 매출 동반 성장</p><p class="phase-desc">일관된 운영이 계정을 바꾸고, 계정이 매출을 바꿉니다</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LONG TERM -->
+<section>
+  <p class="sec-label">Long-term · 장기 계약</p>
+  <div class="longterm-banner fade-in">
+    <span class="longterm-label">3개월 이상 계약</span>
+    <p class="longterm-pct">— 5%</p>
+    <p class="longterm-title">함께 기다릴 준비가 된 분께 드리는 혜택</p>
+    <p class="longterm-desc">하키채 효과를 실제로 경험하려면 꾸준한 운영이 필요합니다. 초반의 미미한 반응에 포기하지 않고 함께할 분을 위해 5% 추가 할인을 드립니다.</p>
+  </div>
+  <div class="risk-banner fade-in">
+    <p class="risk-title">성과 미달시 영상 <span class="risk-highlight">4회 추가 제공</span></p>
+    <p class="risk-desc">3개월 계약 기준, 계약 전 협의한 성과 기준 미달시 기획 · 편집 · 촬영 · 업로드 풀세트 4회를 추가로 제공합니다.</p>
+  </div>
+</section>
+
+<!-- FREE -->
+<section>
+  <p class="sec-label">무료 제공</p>
+  <div class="free-pills fade-in">
+    <span class="free-pill">해시태그 최적화</span>
+    <span class="free-pill">출장 촬영 (추가 비용 없음)</span>
+    <span class="free-pill">캡션 작성 (요청시)</span>
+    <span class="free-pill">알고리즘 전략 문서 (패키지)</span>
+    <span class="free-pill">재계약 할인</span>
+  </div>
+</section>
+
+<!-- NOTE -->
+<section>
+  <p class="sec-label">유의사항</p>
+  <div class="note fade-in">
+    <strong>모든 상품 가격은 VAT 별도입니다.</strong><br>
+    피드 또는 하이라이트 포스터 제작은 별도 문의.<br>
+    장기 계약 할인 및 성과 미달 추가 제공은 계약 전 협의 후 계약서에 명시됩니다.<br>
+    재계약시 브랜드 세계관 & 컨셉 설정 상품은 70만원으로 제공됩니다.
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">NOBLE<span>.</span></div>
+  <p class="footer-note">Instagram Viral Marketing Agency · All prices excl. VAT</p>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
